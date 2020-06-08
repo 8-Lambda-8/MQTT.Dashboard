@@ -18,7 +18,7 @@ import static com.a8lambda8.mqttdashboard.myUtils.LoadStringListFromFile;
 import static com.a8lambda8.mqttdashboard.myUtils.SaveObjectToFile;
 import static com.a8lambda8.mqttdashboard.myUtils.TAG;
 
-public class addBrokerActivity extends AppCompatActivity {
+public class Activity_addBroker extends AppCompatActivity {
     EditText ET_Name, ET_Address, ET_Port, ET_uname, ET_passwd, ET_clientId;
 
 

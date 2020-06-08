@@ -21,7 +21,7 @@ import static com.a8lambda8.mqttdashboard.myUtils.LoadStringListFromFile;
 import static com.a8lambda8.mqttdashboard.myUtils.SP;
 import static com.a8lambda8.mqttdashboard.myUtils.SPEdit;
 
-public class BrokerSelection extends AppCompatActivity {
+public class Activity_BrokerSelection extends AppCompatActivity {
 
     RecyclerView RV_BrokerSelection;
     private RecyclerView.Adapter mAdapter;
@@ -82,7 +82,7 @@ public class BrokerSelection extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_broker) {
-            Intent i = new Intent(this, addBrokerActivity.class);
+            Intent i = new Intent(this, Activity_addBroker.class);
             startActivity(i);
             return true;
         }

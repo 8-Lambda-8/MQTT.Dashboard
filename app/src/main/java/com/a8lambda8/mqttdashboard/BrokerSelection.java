@@ -1,19 +1,31 @@
 package com.a8lambda8.mqttdashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import java.util.List;
 
-import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
+import static com.a8lambda8.mqttdashboard.myUtils.LoadStringListFromFile;
+import static com.a8lambda8.mqttdashboard.myUtils.SP;
+import static com.a8lambda8.mqttdashboard.myUtils.SPEdit;
 
 public class BrokerSelection extends AppCompatActivity {
+
+    RecyclerView RV_BrokerSelection;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +33,28 @@ public class BrokerSelection extends AppCompatActivity {
         setContentView(R.layout.activity_broker_selection);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SP = PreferenceManager.getDefaultSharedPreferences(this);
+        SPEdit = SP.edit();
+        SPEdit.apply();
+
+        List<String> brokerNames = LoadStringListFromFile(getString(R.string.key_brokerNames), getBaseContext());
+
+        /*
+        if (brokerNames == null){
+            Log.d(TAG, "brokerNames is null");
+            brokerNames = new ArrayList<>();
+            SaveObjectToFile((ArrayList<String>)brokerNames,brokerNameFiles,getBaseContext());
+            brokerNames.add("No Broker");
+        }//*/
+
+        RV_BrokerSelection = findViewById(R.id.rv_brokerSelection);
+        layoutManager = new LinearLayoutManager(this);
+        RV_BrokerSelection.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new Adapter_BrokerSelection(brokerNames);
+        RV_BrokerSelection.setAdapter(mAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +81,12 @@ public class BrokerSelection extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        if (id == R.id.action_add_broker) {
+            Intent i = new Intent(this, addBrokerActivity.class);
+            startActivity(i);
+            return true;
+        }
+
         if (id == R.id.action_settings) {
             return true;
         }

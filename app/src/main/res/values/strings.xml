@@ -11,4 +11,11 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="add_broker">Add Broker</string>
     <string name="title_activity_add_broker">Add Broker</string>
+    <string name="broker_name">Broker Name</string>
+    <string name="address">Address</string>
+    <string name="port">Port</string>
+    <string name="password">Password</string>
+    <string name="client_id_must_be_unique">Client ID (must be unique)</string>
+    <string name="username">Username</string>
+    <string name="key_brokerNames">brokerNames</string>
 </resources>

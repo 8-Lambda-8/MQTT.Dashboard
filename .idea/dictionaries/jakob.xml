@@ -2,6 +2,8 @@
   <dictionary name="jakob">
     <words>
       <w>mqttdashboard</w>
+      <w>passwd</w>
+      <w>uname</w>
     </words>
   </dictionary>
 </component>

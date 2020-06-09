@@ -18,4 +18,5 @@
     <string name="client_id_must_be_unique">Client ID (must be unique)</string>
     <string name="username">Username</string>
     <string name="key_brokerNames">brokerNames</string>
+    <string name="title_activity__dashboard">Dashboard</string>
 </resources>

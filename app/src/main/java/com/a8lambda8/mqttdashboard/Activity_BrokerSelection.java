@@ -74,6 +74,11 @@ public class Activity_BrokerSelection extends AppCompatActivity implements Adapt
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,8 +122,8 @@ public class Activity_BrokerSelection extends AppCompatActivity implements Adapt
 
         ContextMenuRecyclerView.RecyclerContextMenuInfo info = (ContextMenuRecyclerView.RecyclerContextMenuInfo) item.getMenuInfo();
 
-        Toast.makeText(getBaseContext(), "id: "+item.getItemId(), Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onContextItemSelected: "+item.toString());
+
         switch (item.getItemId()){
             case R.id.context_edit:
 
@@ -130,6 +135,7 @@ public class Activity_BrokerSelection extends AppCompatActivity implements Adapt
             case R.id.context_delete:
                 DeleteFile(getString(R.string.key_brokerConfig)+brokerNames.get(info.position),getBaseContext());
                 brokerNames.remove(info.position);
+                mAdapter.notifyDataSetChanged();
                 break;
         }
 
@@ -139,7 +145,6 @@ public class Activity_BrokerSelection extends AppCompatActivity implements Adapt
 
     @Override
     public void onBrokerClick(int pos) {
-        Toast.makeText(getBaseContext(), "click: Position is " + pos, Toast.LENGTH_SHORT).show();
 
         Intent i = new Intent(getBaseContext(), Activity_Dashboard.class);
         i.putExtra("BrokerName",brokerNames.get(pos));

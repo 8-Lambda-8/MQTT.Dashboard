@@ -80,5 +80,23 @@ public class Activity_editBroker extends AppCompatActivity {
         ET_passwd = findViewById(R.id.passwd);
         ET_clientId = findViewById(R.id.clientId);
 
+
+        brokerName =  getIntent().getStringExtra("BrokerName");
+        ET_Name.setText(brokerName);
+
+        BrokerConfig brokerConfig = (BrokerConfig) LoadObjectFromFile(getString(R.string.key_brokerConfig)+brokerName,getBaseContext());
+        if(brokerConfig!=null) {
+            if (brokerConfig.getAddress() != null)
+                ET_Address.setText(brokerConfig.getAddress());
+            if (brokerConfig.getPort() != 0)
+                ET_Port.setText(String.format("%d", brokerConfig.getPort()));
+            if (brokerConfig.getUname() != null)
+                ET_uname.setText(brokerConfig.getUname());
+            if (brokerConfig.getPasswd() != null)
+                ET_passwd.setText(brokerConfig.getPasswd());
+            if (brokerConfig.getClientID() != null)
+                ET_clientId.setText(brokerConfig.getClientID());
+        }
+
     }
 }

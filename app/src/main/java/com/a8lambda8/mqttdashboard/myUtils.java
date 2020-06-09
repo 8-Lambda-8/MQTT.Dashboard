@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,6 +39,7 @@ public class myUtils {
 
     static Object LoadObjectFromFile(String filename,Context context){
         Object object = null;
+        Log.d(TAG, "LoadObjectFromFile filename: "+filename);
         try {
             FileInputStream fis = context.openFileInput(filename);//new FileInputStream(file);
             ObjectInputStream is = new ObjectInputStream(fis);
@@ -48,7 +48,7 @@ public class myUtils {
             fis.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            Log.e(TAG, "SaveObjectToFile exeption: "+e.getMessage());
+            Log.e(TAG, "LoadObjectFromFile exeption: "+e.getMessage());
         }
         return object;
     }
@@ -57,6 +57,10 @@ public class myUtils {
         ArrayList<String> lst = (ArrayList<String>) LoadObjectFromFile(filename,context);
         Log.d(TAG, "LoadStringListFromFile: "+lst.toString());
         return lst;
+    }
+
+    static boolean DeleteFile(String filename, Context context){
+        return  context.deleteFile(filename);
     }
 
 }

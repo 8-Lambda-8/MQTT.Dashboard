@@ -12,10 +12,14 @@
         <activity
             android:name=".Activity_Dashboard"
             android:label="@string/title_activity__dashboard"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity_addBroker"
             android:label="@string/title_activity_add_broker"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity_editBroker"
+            android:label="@string/title_activity_edit_broker"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity_BrokerSelection"

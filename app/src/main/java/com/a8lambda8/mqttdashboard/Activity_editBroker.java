@@ -35,8 +35,12 @@ public class Activity_editBroker extends AppCompatActivity {
                         ET_clientId.getText().toString().isEmpty())) {
                     if(!brokerNames.contains(ET_Name.getText().toString())) {
 
-                        brokerNames.add(ET_Name.getText().toString());
 
+                        if(!brokerName.equals(ET_Name.getText().toString())){
+                            brokerNames.remove(brokerName);
+                            DeleteFile(getString(R.string.key_brokerConfig)+brokerName,getBaseContext());
+                            brokerNames.add(ET_Name.getText().toString());
+                        }
                         SaveObjectToFile(brokerNames,getString(R.string.key_brokerNames),getBaseContext());
 
                         BrokerConfig brokerConfig = new BrokerConfig(

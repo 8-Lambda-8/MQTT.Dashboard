@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
+import static com.a8lambda8.mqttdashboard.myUtils.DeleteFile;
 import static com.a8lambda8.mqttdashboard.myUtils.LoadStringListFromFile;
 import static com.a8lambda8.mqttdashboard.myUtils.SP;
 import static com.a8lambda8.mqttdashboard.myUtils.SPEdit;
@@ -127,6 +128,7 @@ public class Activity_BrokerSelection extends AppCompatActivity implements Adapt
 
                 break;
             case R.id.context_delete:
+                DeleteFile(getString(R.string.key_brokerConfig)+brokerNames.get(info.position),getBaseContext());
                 brokerNames.remove(info.position);
                 break;
         }

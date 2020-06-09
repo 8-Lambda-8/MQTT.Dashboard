@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +26,7 @@ import static com.a8lambda8.mqttdashboard.myUtils.SP;
 import static com.a8lambda8.mqttdashboard.myUtils.SPEdit;
 import static com.a8lambda8.mqttdashboard.myUtils.SaveObjectToFile;
 import static com.a8lambda8.mqttdashboard.myUtils.brokerNames;
+import static com.a8lambda8.mqttdashboard.myUtils.TAG;
 
 public class Activity_BrokerSelection extends AppCompatActivity {
 
@@ -44,7 +48,7 @@ public class Activity_BrokerSelection extends AppCompatActivity {
         brokerNames = LoadStringListFromFile(getString(R.string.key_brokerNames), getBaseContext());
 
         if (brokerNames == null){
-            Log.d(myUtils.TAG, "brokerNames is null");
+            Log.d(TAG, "brokerNames is null");
             brokerNames = new ArrayList<>();
             SaveObjectToFile((ArrayList<String>)brokerNames,getString(R.string.key_brokerNames),getBaseContext());
         }
@@ -56,6 +60,8 @@ public class Activity_BrokerSelection extends AppCompatActivity {
         // specify an adapter (see also next example)
         mAdapter = new Adapter_BrokerSelection(brokerNames);
         RV_BrokerSelection.setAdapter(mAdapter);
+        registerForContextMenu(RV_BrokerSelection);
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -95,4 +101,32 @@ public class Activity_BrokerSelection extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        // Inflate Menu from xml resource
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_brokerselection_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        Toast.makeText(getBaseContext(), "id: "+item.getItemId(), Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onContextItemSelected: "+item.toString());
+        switch (item.getItemId()){
+            case R.id.context_edit:
+
+                break;
+            case R.id.context_delete:
+                //brokerNames.remove()
+                break;
+        }
+
+
+        return false;
+    }
+
 }

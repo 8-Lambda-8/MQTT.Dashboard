@@ -1,6 +1,7 @@
 package com.a8lambda8.mqttdashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -10,8 +11,11 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import static com.a8lambda8.mqttdashboard.myUtils.DeleteFile;
+import static com.a8lambda8.mqttdashboard.myUtils.LoadObjectFromFile;
 import static com.a8lambda8.mqttdashboard.myUtils.SaveObjectToFile;
 import static com.a8lambda8.mqttdashboard.myUtils.brokerNames;
+import static com.a8lambda8.mqttdashboard.myUtils.TAG;
 
 public class Activity_editBroker extends AppCompatActivity {
     EditText ET_Name, ET_Address, ET_Port, ET_uname, ET_passwd, ET_clientId;
@@ -33,7 +37,12 @@ public class Activity_editBroker extends AppCompatActivity {
                         ET_Address.getText().toString().isEmpty()||
                         ET_Port.getText().toString().isEmpty()||
                         ET_clientId.getText().toString().isEmpty())) {
-                    if(!brokerNames.contains(ET_Name.getText().toString())) {
+
+                    ET_Name.setText(ET_Name.getText().toString().trim());
+                    ET_Address.setText(ET_Address.getText().toString().trim());
+                    ET_Port.setText(ET_Port.getText().toString().trim());
+                    ET_uname.setText(ET_uname.getText().toString().trim());
+                    ET_clientId.setText(ET_clientId.getText().toString().trim());
 
 
                         if(!brokerName.equals(ET_Name.getText().toString())){
@@ -55,15 +64,12 @@ public class Activity_editBroker extends AppCompatActivity {
 
                         Snackbar.make(view, "Saved Broker", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
-                    }else{
-                        Snackbar.make(view, "Broker already exists", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
 
                 }else{
                     Snackbar.make(view, "Name is null", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
+
             }
         });
 

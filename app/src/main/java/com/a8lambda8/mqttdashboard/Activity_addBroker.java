@@ -39,6 +39,14 @@ public class Activity_addBroker extends AppCompatActivity {
                         ET_Address.getText().toString().isEmpty()||
                         ET_Port.getText().toString().isEmpty()||
                         ET_clientId.getText().toString().isEmpty())) {
+
+                    ET_Name.setText(ET_Name.getText().toString().trim());
+                    ET_Address.setText(ET_Address.getText().toString().trim());
+                    ET_Port.setText(ET_Port.getText().toString().trim());
+                    ET_uname.setText(ET_uname.getText().toString().trim());
+                    ET_clientId.setText(ET_clientId.getText().toString().trim());
+
+
                     if(!brokerNames.contains(ET_Name.getText().toString())) {
 
                         brokerNames.add(ET_Name.getText().toString());

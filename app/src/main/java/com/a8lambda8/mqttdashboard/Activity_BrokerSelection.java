@@ -135,6 +135,7 @@ public class Activity_BrokerSelection extends AppCompatActivity implements Adapt
             case R.id.context_delete:
                 DeleteFile(getString(R.string.key_brokerConfig)+brokerNames.get(info.position),getBaseContext());
                 brokerNames.remove(info.position);
+                SaveObjectToFile(brokerNames,getString(R.string.key_brokerNames),getBaseContext());
                 mAdapter.notifyDataSetChanged();
                 break;
         }

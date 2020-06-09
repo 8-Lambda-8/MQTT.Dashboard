@@ -3,6 +3,7 @@ package com.a8lambda8.mqttdashboard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,11 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import static com.a8lambda8.mqttdashboard.myUtils.LoadStringListFromFile;
 import static com.a8lambda8.mqttdashboard.myUtils.SP;
 import static com.a8lambda8.mqttdashboard.myUtils.SPEdit;
+import static com.a8lambda8.mqttdashboard.myUtils.SaveObjectToFile;
+import static com.a8lambda8.mqttdashboard.myUtils.brokerNames;
 
 public class Activity_BrokerSelection extends AppCompatActivity {
 
@@ -38,15 +41,13 @@ public class Activity_BrokerSelection extends AppCompatActivity {
         SPEdit = SP.edit();
         SPEdit.apply();
 
-        List<String> brokerNames = LoadStringListFromFile(getString(R.string.key_brokerNames), getBaseContext());
+        brokerNames = LoadStringListFromFile(getString(R.string.key_brokerNames), getBaseContext());
 
-        /*
         if (brokerNames == null){
-            Log.d(TAG, "brokerNames is null");
+            Log.d(myUtils.TAG, "brokerNames is null");
             brokerNames = new ArrayList<>();
-            SaveObjectToFile((ArrayList<String>)brokerNames,brokerNameFiles,getBaseContext());
-            brokerNames.add("No Broker");
-        }//*/
+            SaveObjectToFile((ArrayList<String>)brokerNames,getString(R.string.key_brokerNames),getBaseContext());
+        }
 
         RV_BrokerSelection = findViewById(R.id.rv_brokerSelection);
         layoutManager = new LinearLayoutManager(this);
@@ -65,6 +66,7 @@ public class Activity_BrokerSelection extends AppCompatActivity {
             }
         });
     }
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

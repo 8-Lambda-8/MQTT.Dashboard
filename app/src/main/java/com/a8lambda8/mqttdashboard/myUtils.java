@@ -19,7 +19,7 @@ public class myUtils {
 
     static String TAG = "xxx";
 
-    List<String> brokerNames;
+    static List<String> brokerNames;
 
     //brokerNames
     static boolean SaveObjectToFile(Object obj, String filename, Context context){

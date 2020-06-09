@@ -17,6 +17,7 @@ import java.util.List;
 import static com.a8lambda8.mqttdashboard.myUtils.LoadStringListFromFile;
 import static com.a8lambda8.mqttdashboard.myUtils.SaveObjectToFile;
 import static com.a8lambda8.mqttdashboard.myUtils.TAG;
+import static com.a8lambda8.mqttdashboard.myUtils.brokerNames;
 
 public class Activity_addBroker extends AppCompatActivity {
     EditText ET_Name, ET_Address, ET_Port, ET_uname, ET_passwd, ET_clientId;
@@ -33,12 +34,6 @@ public class Activity_addBroker extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                List<String> brokerNames = LoadStringListFromFile(getString(R.string.key_brokerNames), getBaseContext());
-                if (brokerNames == null){
-                    Log.d(TAG, "brokerNames is null");
-                    brokerNames = new ArrayList<>();
-                }
 
                 if(!(ET_Name.getText().toString().isEmpty()||
                         ET_Address.getText().toString().isEmpty()||

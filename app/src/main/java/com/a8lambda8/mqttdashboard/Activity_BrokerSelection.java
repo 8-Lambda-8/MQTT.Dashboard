@@ -114,6 +114,8 @@ public class Activity_BrokerSelection extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
+        ContextMenuRecyclerView.RecyclerContextMenuInfo info = (ContextMenuRecyclerView.RecyclerContextMenuInfo) item.getMenuInfo();
+
         Toast.makeText(getBaseContext(), "id: "+item.getItemId(), Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onContextItemSelected: "+item.toString());
         switch (item.getItemId()){
@@ -121,7 +123,7 @@ public class Activity_BrokerSelection extends AppCompatActivity {
 
                 break;
             case R.id.context_delete:
-                //brokerNames.remove()
+                brokerNames.remove(info.position);
                 break;
         }
 

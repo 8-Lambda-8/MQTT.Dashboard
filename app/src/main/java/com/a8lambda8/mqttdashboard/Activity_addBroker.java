@@ -45,6 +45,16 @@ public class Activity_addBroker extends AppCompatActivity {
 
                         SaveObjectToFile(brokerNames,getString(R.string.key_brokerNames),getBaseContext());
 
+                        BrokerConfig brokerConfig = new BrokerConfig(
+                                ET_Name.getText().toString(),
+                                ET_Address.getText().toString(),
+                                Integer.parseInt(ET_Port.getText().toString()),
+                                ET_uname.getText().toString(),
+                                ET_passwd.getText().toString(),
+                                ET_clientId.getText().toString()
+                        );
+                        SaveObjectToFile(brokerConfig,getString(R.string.key_brokerConfig)+ET_Name.getText().toString(),getBaseContext());
+
                         Snackbar.make(view, "Saved Broker", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }else{

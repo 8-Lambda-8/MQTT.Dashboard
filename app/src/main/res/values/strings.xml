@@ -19,4 +19,6 @@
     <string name="username">Username</string>
     <string name="key_brokerNames">brokerNames</string>
     <string name="title_activity__dashboard">Dashboard</string>
+    <string name="title_activity_edit_broker">Edit Broker</string>
+    <string name="key_brokerConfig">brokerConfig_</string>
 </resources>

@@ -16,7 +16,7 @@ import static com.a8lambda8.mqttdashboard.myUtils.brokerNames;
 public class Activity_editBroker extends AppCompatActivity {
     EditText ET_Name, ET_Address, ET_Port, ET_uname, ET_passwd, ET_clientId;
 
-
+    String brokerName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +38,16 @@ public class Activity_editBroker extends AppCompatActivity {
                         brokerNames.add(ET_Name.getText().toString());
 
                         SaveObjectToFile(brokerNames,getString(R.string.key_brokerNames),getBaseContext());
+
+                        BrokerConfig brokerConfig = new BrokerConfig(
+                                ET_Name.getText().toString(),
+                                ET_Address.getText().toString(),
+                                Integer.parseInt(ET_Port.getText().toString()),
+                                ET_uname.getText().toString(),
+                                ET_passwd.getText().toString(),
+                                ET_clientId.getText().toString()
+                        );
+                        SaveObjectToFile(brokerConfig,getString(R.string.key_brokerConfig)+ET_Name.getText().toString(),getBaseContext());
 
                         Snackbar.make(view, "Saved Broker", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();

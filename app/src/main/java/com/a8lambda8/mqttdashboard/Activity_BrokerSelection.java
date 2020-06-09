@@ -121,6 +121,10 @@ public class Activity_BrokerSelection extends AppCompatActivity implements Adapt
         switch (item.getItemId()){
             case R.id.context_edit:
 
+                Intent i = new Intent(getBaseContext(), Activity_editBroker.class);
+                i.putExtra("BrokerName",brokerNames.get(info.position));
+                startActivity(i);
+
                 break;
             case R.id.context_delete:
                 brokerNames.remove(info.position);

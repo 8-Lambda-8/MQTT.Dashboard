@@ -28,7 +28,7 @@ import static com.a8lambda8.mqttdashboard.myUtils.SaveObjectToFile;
 import static com.a8lambda8.mqttdashboard.myUtils.brokerNames;
 import static com.a8lambda8.mqttdashboard.myUtils.TAG;
 
-public class Activity_BrokerSelection extends AppCompatActivity {
+public class Activity_BrokerSelection extends AppCompatActivity implements Adapter_BrokerSelection.OnBrokerSelectListener{
 
     RecyclerView RV_BrokerSelection;
     private RecyclerView.Adapter mAdapter;
@@ -58,7 +58,7 @@ public class Activity_BrokerSelection extends AppCompatActivity {
         RV_BrokerSelection.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new Adapter_BrokerSelection(brokerNames);
+        mAdapter = new Adapter_BrokerSelection(brokerNames, this);
         RV_BrokerSelection.setAdapter(mAdapter);
         registerForContextMenu(RV_BrokerSelection);
 
@@ -72,7 +72,7 @@ public class Activity_BrokerSelection extends AppCompatActivity {
             }
         });
     }
-    
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,4 +131,13 @@ public class Activity_BrokerSelection extends AppCompatActivity {
         return false;
     }
 
+    @Override
+    public void onBrokerClick(int pos) {
+        Toast.makeText(getBaseContext(), "click: Position is " + pos, Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(getBaseContext(), Activity_Dashboard.class);
+        i.putExtra("BrokerName",brokerNames.get(pos));
+
+        startActivity(i);
+    }
 }

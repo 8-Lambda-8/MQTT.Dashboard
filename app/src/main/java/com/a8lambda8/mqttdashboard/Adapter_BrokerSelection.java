@@ -17,22 +17,32 @@ import static com.a8lambda8.mqttdashboard.myUtils.TAG;
 
 public class Adapter_BrokerSelection extends RecyclerView.Adapter<Adapter_BrokerSelection.MyViewHolder> {
     private List<String> mDataset;
+    private OnBrokerSelectListener mOnBrokerSelectListener;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         public View view;
-        public MyViewHolder(View v) {
+        OnBrokerSelectListener onBrokerSelectListener;
+        public MyViewHolder(View v,OnBrokerSelectListener onBrokerSelectListener) {
             super(v);
             view = v;
+            this.onBrokerSelectListener = onBrokerSelectListener;
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onBrokerSelectListener.onBrokerClick(getAdapterPosition());
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public Adapter_BrokerSelection(List<String> myDataset) {
+    public Adapter_BrokerSelection(List<String> myDataset, OnBrokerSelectListener onBrokerSelectListener) {
         mDataset =  myDataset;
+        mOnBrokerSelectListener = onBrokerSelectListener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -43,7 +53,7 @@ public class Adapter_BrokerSelection extends RecyclerView.Adapter<Adapter_Broker
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.adapter_brokerselection, parent, false);
 
-        MyViewHolder vh = new MyViewHolder(v);
+        MyViewHolder vh = new MyViewHolder(v, mOnBrokerSelectListener);
         return vh;
     }
 
@@ -68,6 +78,9 @@ public class Adapter_BrokerSelection extends RecyclerView.Adapter<Adapter_Broker
         return mDataset.size();
     }
 
+    public interface OnBrokerSelectListener{
+        void onBrokerClick(int pos);
+    }
 
 
 }

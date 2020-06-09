@@ -1,5 +1,6 @@
 package com.a8lambda8.mqttdashboard;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -133,10 +135,25 @@ public class Activity_BrokerSelection extends AppCompatActivity implements Adapt
 
                 break;
             case R.id.context_delete:
-                DeleteFile(getString(R.string.key_brokerConfig)+brokerNames.get(info.position),getBaseContext());
-                brokerNames.remove(info.position);
-                SaveObjectToFile(brokerNames,getString(R.string.key_brokerNames),getBaseContext());
-                mAdapter.notifyDataSetChanged();
+                final int pos = info.position;
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Delete the Broker?")
+                        .setMessage("Delete "+brokerNames.get(info.position)+"?")
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DeleteFile(getString(R.string.key_brokerConfig)+brokerNames.get(pos),getBaseContext());
+                                brokerNames.remove(pos);
+                                SaveObjectToFile(brokerNames,getString(R.string.key_brokerNames),getBaseContext());
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel,null)
+                        .setIcon(android.R.drawable.ic_menu_delete)
+                        .show();
+
+
                 break;
         }
 

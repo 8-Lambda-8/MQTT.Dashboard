@@ -10,9 +10,9 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_add_broker"
+        android:id="@+id/action_add_metric"
         android:icon="@android:drawable/ic_menu_add"
         android:orderInCategory="90"
-        android:title="@string/add_broker"
+        android:title="@string/add_metric"
         app:showAsAction="ifRoom" />
 </menu>

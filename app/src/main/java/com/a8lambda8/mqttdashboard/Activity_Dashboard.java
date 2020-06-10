@@ -1,11 +1,17 @@
 package com.a8lambda8.mqttdashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -22,10 +28,15 @@ import java.nio.charset.StandardCharsets;
 
 import static com.a8lambda8.mqttdashboard.myUtils.LoadObjectFromFile;
 import static com.a8lambda8.mqttdashboard.myUtils.TAG;
+import static com.a8lambda8.mqttdashboard.myUtils.brokerNames;
 
-public class Activity_Dashboard extends AppCompatActivity implements MqttCallback {
+public class Activity_Dashboard extends AppCompatActivity implements MqttCallback, Adapter_Dashboard.OnBrokerSelectListener {
 
     MqttAndroidClient mqttClient;
+
+    RecyclerView RV_Dashboard;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +57,7 @@ public class Activity_Dashboard extends AppCompatActivity implements MqttCallbac
                     msg.setRetained(true);
                     msg.setPayload("1".getBytes(StandardCharsets.UTF_8));
                     mqttClient.publish("/LightSwitch/0/0",msg);
+
                 } catch (MqttException e) {
                     e.printStackTrace();
                 }
@@ -53,6 +65,19 @@ public class Activity_Dashboard extends AppCompatActivity implements MqttCallbac
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)                        .setAction("Action", null).show();
             }
         });
+
+        RV_Dashboard = findViewById(R.id.rv_dashboard);
+        layoutManager = new GridLayoutManager(this,3);
+        RV_Dashboard.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        //mAdapter = new Adapter_Dashboard(brokerNames, this);
+        //RV_Dashboard.setAdapter(mAdapter);
+        //registerForContextMenu(RV_Dashboard);
+
+
+
+
 
         BrokerConfig brokerConfig = (BrokerConfig) LoadObjectFromFile(getString(R.string.key_brokerConfig)+getIntent().getStringExtra("BrokerName"),getBaseContext());
 

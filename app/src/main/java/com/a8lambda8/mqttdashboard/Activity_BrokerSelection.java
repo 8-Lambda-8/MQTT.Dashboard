@@ -153,10 +153,8 @@ public class Activity_BrokerSelection extends AppCompatActivity implements Adapt
                         .setIcon(android.R.drawable.ic_menu_delete)
                         .show();
 
-
                 break;
         }
-
 
         return false;
     }

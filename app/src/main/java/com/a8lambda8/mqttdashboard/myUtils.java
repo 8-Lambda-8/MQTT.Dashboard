@@ -21,6 +21,7 @@ public class myUtils {
     static String TAG = "xxx";
 
     static List<String> brokerNames;
+    static List<MQTT_Metric> brokerMetrics;
 
     static MqttAndroidClient mqttClient;
     //brokerNames

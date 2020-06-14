@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,6 +22,7 @@ public class myUtils {
 
     static List<String> brokerNames;
 
+    static MqttAndroidClient mqttClient;
     //brokerNames
     static boolean SaveObjectToFile(Object obj, String filename, Context context){
         boolean worked = true;

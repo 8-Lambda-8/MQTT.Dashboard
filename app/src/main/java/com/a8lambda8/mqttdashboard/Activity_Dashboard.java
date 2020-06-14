@@ -1,17 +1,10 @@
 package com.a8lambda8.mqttdashboard;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,13 +20,16 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.nio.charset.StandardCharsets;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import static com.a8lambda8.mqttdashboard.myUtils.LoadObjectFromFile;
 import static com.a8lambda8.mqttdashboard.myUtils.TAG;
-import static com.a8lambda8.mqttdashboard.myUtils.brokerNames;
+import static com.a8lambda8.mqttdashboard.myUtils.mqttClient;
 
 public class Activity_Dashboard extends AppCompatActivity implements MqttCallback, Adapter_Dashboard.OnBrokerSelectListener {
-
-    MqttAndroidClient mqttClient;
 
     RecyclerView RV_Dashboard;
     private RecyclerView.Adapter mAdapter;

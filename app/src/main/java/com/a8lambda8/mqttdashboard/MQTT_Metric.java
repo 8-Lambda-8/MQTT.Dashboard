@@ -24,9 +24,8 @@ public class MQTT_Metric {
 
     int Qos;
 
-    MQTT_Metric(MqttClient mqttClient) {
+    MQTT_Metric() {
 
-        this.mqttClient = mqttClient;
     }
 
     void sendMessage(String payload){
@@ -36,7 +35,7 @@ public class MQTT_Metric {
         msg.setQos(Qos);
 
         try {
-            mqttClient.publish("/LightSwitch/0/0",msg);
+            mqttClient.publish(TopicPub,msg);
 
         } catch (MqttException e) {
             e.printStackTrace();

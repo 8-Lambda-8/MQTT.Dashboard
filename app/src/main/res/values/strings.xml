@@ -20,6 +20,7 @@
     <string name="title_activity_edit_broker">Edit Broker</string>
     <string name="key_brokerConfig">brokerConfig_</string>
     <string name="add_metric">Add Metric</string>
+
     <string name="metric_name">Metric Name</string>
     <string name="topic">Topic</string>
     <string name="topic_publish">Topic (publish)</string>
@@ -29,4 +30,7 @@
     <string name="qos_1">QoS 1</string>
     <string name="qos_2">QoS 2</string>
     <string name="retained">Retained</string>
+
+    <string name="key_brokerMetrics">brokerMetrics_</string>
+
 </resources>

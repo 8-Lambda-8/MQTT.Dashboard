@@ -1,10 +1,14 @@
 package com.a8lambda8.mqttdashboard;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -157,8 +161,28 @@ public class Activity_Dashboard extends AppCompatActivity implements MqttCallbac
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_metric) {
-            //Intent i = new Intent(this, Activity_addMetric.class);
-            //startActivity(i);
+
+
+            String[] Types = {"Text","Button","Range"};
+
+            ArrayAdapter adapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_1,Types);
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Choose ype")
+                    .setNegativeButton(android.R.string.cancel,null)
+                    .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            Intent intent = new Intent(getBaseContext(), Activity_addMetric.class);
+                            intent.putExtra("MetricType",i);
+                            startActivity(intent);
+
+                        }
+                    })
+                    .show();
+
+
             return true;
         }
 
